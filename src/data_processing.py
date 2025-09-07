@@ -60,6 +60,24 @@ def get_trend_slope(csv_file_path):
         print(f"An error occurred with file {csv_file_path}: {e}")
         return 0
 
+trends_file_mapping = {
+    "Software Engineer": "../data/raw/trends/trends_software_engineer.csv",
+    "Software Developer": "../data/raw/trends/trends_software_developer.csv",
+    "Frontend Developer" : "../data/raw/trends/trends_frontend_developer.csv",
+    "FullStack Developer" : "../data/raw/trends/trends_fullstack_developer.csv",
+    "Backend Developer" : "../data/raw/trends/trends_backend_developer.csv",
+    "Data Analyst": "../data/raw/trends/trends_data_analyst.csv",
+    "AI/ML Engineer": "../data/raw/trends/trends_aiml_engineer.csv",
+    "DevOps": "../data/raw/trends/trends_devops.csv",
+    "CyberSecurity Analyst" : "../data/raw/trends/trends_cybersecurity_analyst.csv",
+    "Business Analyst" : "../data/raw/trends/trends_business_analyst.csv",
+    "App Developer" : "../data/raw/trends/trends_app_developer.csv",
+    "Software Tester" : "../data/raw/trends/trends_software_tester.csv",
+    "Technical Support" : "../data/raw/trends/trends_technical_support.csv", 
+    "Network Engineer" : "../data/raw/trends/trends_network_engineer.csv" ,
+    "Product Engineer" : "../data/raw/trends/trends_product_engineer.csv"
+}
+
 def process_raw_data(raw_df, trends_mapping):
 
     processed_df = raw_df.copy()
