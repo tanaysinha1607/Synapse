@@ -26,3 +26,45 @@ def enrich_skills_with_gemini(project_description, model):
     except (json.JSONDecodeError, AttributeError) as e:
         print(f"Error parsing enrichment JSON: {e}")
         return []
+
+def create_skill_graph(skill_list, job_title, model):
+
+    skills_str = ", ".join(f"'{skill}'" for skill in skill_list)
+    
+    prompt = f"""
+    You are a senior technical recruiter, skills taxonomy expert, and JSON structuring specialist.
+    Your task is to analyze a raw list of skills for the role {job_title} and reorganize them into a clean, hierarchical JSON object.
+    Instructions for the Model
+    Input:
+    Job Title: {job_title}
+    Skills List: {skills_str}
+    Output Requirements:
+    Output only a valid JSON object, no explanations, no comments, no extra text.
+    Top-level keys must be skill categories such as:
+    "Programming Languages", 
+    "Frameworks & Libraries",
+    "Databases", 
+    "Cloud Platforms", 
+    "Developer Tools", 
+    "Key Concepts", 
+    "Soft Skills"
+
+    If a skill does not fit into these, create a reasonable new category (e.g., "Specialized Skills").
+    The value of each category should be an array of strings containing only the relevant skills.
+    No duplicates allowed.
+    Constraints:
+    Strict JSON compliance (machine-readable, no trailing commas, no markdown formatting).
+    Preserve original skill names from the input string.
+    Only include categories that actually contain at least one skill.
+    Ensure skills are classified logically and consistently.
+    Final Reminder:
+    Your response must be only the JSON object — no explanations, no prose, no markdown fences.
+    """
+    
+    try:
+        response = model.generate_content(prompt)
+        cleaned_text = response.text.strip().replace('```json', '').replace('```', '')
+        return json.loads(cleaned_text)
+    except (json.JSONDecodeError, AttributeError, Exception) as e:
+        print(f"Error creating skill graph for {job_title}: {e}")
+        return None
