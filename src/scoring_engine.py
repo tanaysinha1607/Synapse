@@ -1,13 +1,15 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
-from sentence_transformers import SentenceTransformer, util
+from sentence_transformers import SentenceTransformer, util, CrossEncoder
 import os
 import ast 
+import json
 
 class SynapseScoringEngine:
     def __init__(self, data_path='data/processed/market_intelligence_db.csv', 
-                 aspirational_data_path='data/processed/aspirational_roles.csv'):
+                 aspirational_data_path='data/processed/aspirational_roles.csv',
+                 career_path_model_path='data/processed/career_path_model.json'):
         
         print("Initializing Synapse Scoring Engine...")
         
@@ -33,20 +35,33 @@ class SynapseScoringEngine:
         self.df['skills_list'] = self.df['skills_list'].apply(
             lambda x: ast.literal_eval(x) if isinstance(x, str) and x.startswith('[') else []
         )
-            
-        print("Loading Sentence Transformer model...")
-        self.model = SentenceTransformer('all-MiniLM-L6-v2')
-        print("Model loaded successfully.")
+        self.df['skill_graph'] = self.df['skill_graph'].apply(
+            lambda x: ast.literal_eval(x) if isinstance(x, str) and x.startswith('{') else {}
+        )
+        
+        try:
+            with open(career_path_model_path, 'r') as f:
+                self.career_path_model = json.load(f)
+            print("Career path model loaded successfully.")
+        except FileNotFoundError:
+            print(f"Warning: Career path model not found at {career_path_model_path}. Proceeding without it.")
+            self.career_path_model = {}
+        
+        print("Loading Sentence Transformer (Bi-Encoder) model...")
+        self.bi_encoder = SentenceTransformer('all-MiniLM-L6-v2')
+        print("Bi-Encoder loaded.")
+        
+        ### NEW: Load the Cross-Encoder model for re-ranking
+        print("Loading Cross-Encoder model...")
+        self.cross_encoder = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
+        print("Cross-Encoder loaded.")
         
         self._prepare_data()
 
     def _prepare_data(self):
         scaler = MinMaxScaler()
         
-        self.df['norm_salary'] = scaler.fit_transform(self.df[['avg_salary_inr']].fillna(0))
-        
-        # CRITICAL CHANGE 2: Intelligently fill missing data for aspirational roles
-        # This makes the synthetic data compatible with our scoring model
+        self.df['norm_salary'] = scaler.fit_transform(self.df[['avg_salary_inr']].fillna(0))        
         self.df['role_volume'] = self.df.groupby('Standard_Title')['role_volume'].transform(lambda x: x.fillna(x.mean()))
         self.df['fgm_score'] = self.df.groupby('Standard_Title')['fgm_score'].transform(lambda x: x.fillna(x.mean()))
         
@@ -66,43 +81,58 @@ class SynapseScoringEngine:
     def get_tiered_recommendations(self, user_skills):
         if not user_skills: return {}
 
-        user_embedding = self.model.encode(' '.join(user_skills), convert_to_tensor=True)
-        
-        # Create the user skills set once for efficiency
+        #STAGE 1: FIND (Fast search for initial candidates) 
         user_skills_set = set(s.lower() for s in user_skills)
-
-        # Ensure the skill_graph column is a dictionary
-        self.df['skill_graph_eval'] = self.df['skill_graph'].apply(
-            lambda x: ast.literal_eval(x) if isinstance(x, str) and x.startswith('{') else {}
-        )
-
-        # Calculate the new hierarchical score
-        self.df['skill_overlap_score'] = self.df['skill_graph_eval'].apply(
+        # Use the fast hierarchical score to get an initial relevance score
+        self.df['skill_overlap_score'] = self.df['skill_graph'].apply(
             lambda graph: self._calculate_hierarchical_skill_score(graph, user_skills_set)
         )
 
         master_weights = {'demand': 0.4, 'salary': 0.3, 'skill': 0.3}
-        self.df['TrajectoryScore'] = (master_weights['demand'] * self.df['final_demand_score']) + \
-                                     (master_weights['salary'] * self.df['norm_salary']) + \
-                                     (master_weights['skill'] * self.df['skill_overlap_score'])
+        self.df['InitialTrajectoryScore'] = (master_weights['demand'] * self.df['final_demand_score']) + \
+                                            (master_weights['salary'] * self.df['norm_salary']) + \
+                                            (master_weights['skill'] * self.df['skill_overlap_score'])
         
-        # Step A: Find the best overall job to determine the top recommended ROLE
-        top_job = self.df.loc[self.df['TrajectoryScore'].idxmax()]
+        # Get the top 20 candidates from the fast search
+        top_candidates = self.df.nlargest(20, 'InitialTrajectoryScore').copy()
+        
+        # STAGE 2: REFINE (Slow, high-precision re-ranking)        
+        user_skills_text = ' '.join(user_skills)
+        
+        # Create pairs of [user_skills, job_skills] for the cross-encoder
+        job_skills_texts = top_candidates['skills_list'].apply(lambda skills: ' '.join(skills))
+        sentence_pairs = [[user_skills_text, job_text] for job_text in job_skills_texts]
+        
+        # Predict the new, more accurate scores
+        print(f"Re-ranking top {len(sentence_pairs)} candidates with Cross-Encoder...")
+        cross_encoder_scores = self.cross_encoder.predict(sentence_pairs)
+        
+        # Update the skill_overlap_score for our top candidates with the new, better score
+        top_candidates['skill_overlap_score'] = cross_encoder_scores
+
+        # Re-calculate the Final TrajectoryScore with the more accurate skill score
+        top_candidates['TrajectoryScore'] = (master_weights['demand'] * top_candidates['final_demand_score']) + \
+                                            (master_weights['salary'] * top_candidates['norm_salary']) + \
+                                            (master_weights['skill'] * top_candidates['skill_overlap_score'])
+        
+        # Find the best overall job from the RE-RANKED list
+        top_job = top_candidates.loc[top_candidates['TrajectoryScore'].idxmax()]
         top_role_title = top_job['Standard_Title']
 
-        # Step B: Filter for only jobs of that top role
-        role_df = self.df[self.df['Standard_Title'] == top_role_title].copy()
+        role_df = top_candidates[top_candidates['Standard_Title'] == top_role_title]
         
-        # Step C: Find the best example for each tier
         aspirational_tier = role_df[role_df['tier'] == 'aspirational'].nlargest(1, 'TrajectoryScore')
         target_tier = role_df[role_df['tier'] == 'target'].nlargest(1, 'TrajectoryScore')
         discovery_tier = role_df[role_df['tier'] == 'target'].nlargest(5, 'TrajectoryScore').tail(1)
         
-        # Step D: Prepare the final structured output
+        next_probable_steps = self.career_path_model.get(top_role_title, None)
+
+        
         output = {
             "top_role_title": top_role_title,
-            "your_skill_match_percent": round(top_job['skill_overlap_score'] * 100, 2),
+            "your_skill_match_percent": round(top_job['skill_overlap_score'] * 100, 2), # Now using the more accurate score
             "market_demand_score": round(top_job['final_demand_score'] * 100, 2),
+            "next_probable_steps": next_probable_steps,
             "tiers": {
                 "aspirational": aspirational_tier.to_dict(orient='records')[0] if not aspirational_tier.empty else None,
                 "target": target_tier.to_dict(orient='records')[0] if not target_tier.empty else None,

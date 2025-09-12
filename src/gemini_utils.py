@@ -68,3 +68,30 @@ def create_skill_graph(skill_list, job_title, model):
     except (json.JSONDecodeError, AttributeError, Exception) as e:
         print(f"Error creating skill graph for {job_title}: {e}")
         return None
+
+def generate_career_path_probabilities(role_title, model):
+    """
+    Uses Gemini to generate the 3 most likely next career steps with probabilities.
+    """
+    prompt = f"""
+    Act as an expert career analyst for the Indian tech industry.
+    For a person currently in an entry-level (0-2 years experience) role as a '{role_title}', what are the three most likely next career steps or job titles after 2-3 years of experience?
+    
+    Your output MUST be a valid JSON object. The keys should be the next job titles, and the values should be their approximate probability as a float, summing to 1.0. Do not include any explanations, just the JSON object.
+
+    Example for 'Data Analyst':
+    {{
+      "Senior Data Analyst": 0.6,
+      "Business Intelligence Developer": 0.3,
+      "Data Scientist": 0.1
+    }}
+
+    Now, generate the JSON for a starting role of '{role_title}':
+    """
+    try:
+        response = model.generate_content(prompt)
+        cleaned_text = response.text.strip().replace('```json', '').replace('```', '')
+        return json.loads(cleaned_text)
+    except (json.JSONDecodeError, AttributeError, Exception) as e:
+        print(f"Error generating career path for {role_title}: {e}")
+        return None
