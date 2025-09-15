@@ -7,3 +7,4 @@ torch
 google-generativeai
 python-dotenv
 Flask
+hf_xet
