@@ -11,7 +11,7 @@ env/
 .ipynb_checkpoints/
 
 # Data Files (IMPORTANT: See note below)
-data/
+#data/
 
 # OS-specific files
 .DS_Store
