@@ -72,34 +72,42 @@
 
 1. Clone the repo:
    bash
-   git clone <repo_url>
+   ```
+   git clone https://github.com/tanaysinha1607/Synapse
    cd synapse
+   ```
 `
 
 2.  Set environment variables:
 
     bash
+    ```
     export GEMINI_API_KEY=<your_api_key>
+    ```
     
 
 3.  Install backend dependencies:
 
     bash
+    ```
     pip install -r requirement.txt
+    ```
     
 
 4.  Run backend:
 
     bash
+    ```
     PYTHONPATH=src python src/main_api.py
-    
+    ```
 
 5.  Start frontend:
 
     bash
+    ```
     cd frontend
     npm install
-    npm run dev
+    npm run dev```
     
 
 -----
