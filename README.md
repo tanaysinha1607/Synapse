@@ -76,7 +76,7 @@
    git clone https://github.com/tanaysinha1607/Synapse
    cd synapse
    ```
-`
+
 
 2.  Set environment variables:
 
@@ -116,6 +116,3 @@
 ## Hackathon Use Case
 
 Project Synapse empowers learners and professionals to make smarter career decisions by combining AI-driven insights, role recommendations, skill gap analysis, and mentorship—all through an intuitive interface.
-
-
-```
