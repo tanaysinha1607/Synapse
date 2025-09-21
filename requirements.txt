@@ -1,5 +1,6 @@
 annotated-types==0.7.0
 asttokens==3.0.0
+beautifulsoup4
 blinker==1.9.0
 cachetools==5.5.2
 certifi==2025.8.3
@@ -7,9 +8,11 @@ charset-normalizer==3.4.3
 click==8.2.1
 colorama==0.4.6
 comm==0.2.3
+crewai
 debugpy==1.8.16
 decorator==5.2.1
 executing==2.2.1
+fastapi
 filelock==3.19.1
 Flask==3.1.2
 flask-cors==4.0.0
@@ -19,9 +22,11 @@ google-api-core==2.25.1
 google-api-python-client==2.181.0
 google-auth==2.40.3
 google-auth-httplib2==0.2.0
+google-cloud-aiplatform==1.68.0
+google-cloud-firestore
+google-cloud-storage
 google-generativeai==0.8.5
 googleapis-common-protos==1.70.0
-google-cloud-aiplatform==1.68.0
 grpcio==1.74.0
 grpcio-status==1.71.2
 hf-xet==1.1.10
@@ -39,6 +44,7 @@ jupyter_client==8.6.3
 jupyter_core==5.8.1
 MarkupSafe==3.0.2
 matplotlib-inline==0.1.7
+moviepy
 mpmath==1.3.0
 nest-asyncio==1.6.0
 networkx==3.5
@@ -57,13 +63,16 @@ pyasn1==0.6.1
 pyasn1_modules==0.4.2
 pydantic==2.11.7
 pydantic_core==2.33.2
+PyPDF2
 Pygments==2.19.2
 pyparsing==3.2.3
 python-dateutil==2.9.0.post0
 python-dotenv==1.1.1
+pymupdf
 pytz==2025.2
 pywin32==311; sys_platform == "win32"
 pyzmq==27.1.0
+PyYAML
 regex==2025.9.1
 requests==2.32.5
 rsa==4.9.1
@@ -87,5 +96,8 @@ typing_extensions==4.15.0
 tzdata==2025.2
 uritemplate==4.2.0
 urllib3==2.5.0
+uvicorn
+vertexai
 wcwidth==0.2.13
 Werkzeug==3.1.3
+whisper
