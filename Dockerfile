@@ -16,4 +16,4 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["python", "main_api.py"]
+CMD ["python", "Backend/src/main_api.py"]
