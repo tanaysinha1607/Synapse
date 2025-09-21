@@ -6,14 +6,14 @@ WORKDIR /app
 
 # Install dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirement.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy all backend files into the container
 COPY . .
-EXPOSE 8080
-CMD ["python", "src/main_api.py"]
+
+# Entry point to load GCP credentials
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["python", "main_api.py"]
 
+CMD ["python", "main_api.py"]
