@@ -14,7 +14,7 @@ if not api_key:
     raise ValueError("GEMINI_API_KEY not found. Please set it in your .env file.")
 genai.configure(api_key= api_key)
 
-model = genai.GenerativeModel('gemini-1.5-flash-latest')
+model = genai.GenerativeModel('models/gemini-pro-latest')
 
 ASPIRATIONAL_ROLES = [
     {"company": "Google", "role": "Software Engineer"},
