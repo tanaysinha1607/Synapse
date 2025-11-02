@@ -1,0 +1,14 @@
+[build]
+  command = "pnpm build"
+  publish = "dist"
+
+[dev]
+  command = "pnpm dev"
+  port = 5173
+  publish = "dist"
+
+# Redirects to fix SPA routing (React Router / Vite)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
