@@ -169,9 +169,10 @@ uvicorn app.api:app --reload
 cd ../Frontend
 npm install
 npm run dev
+
+```
+
 ## Demo Instructions  
-
-
 **Frontend Demo:** [https://synapse.vly.site](https://synapse.vly.site)  
 **Backend API (Cloud Run):** [https://synapse-ml-537153748290.us-central1.run.app](https://synapse-ml-537153748290.us-central1.run.app)  
 
