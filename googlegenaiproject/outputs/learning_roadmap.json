@@ -1,0 +1,88 @@
+{
+  "roadmap": {
+    "title": "AI Engineer Learning Roadmap",
+    "stages": [
+      {
+        "stage": 1,
+        "title": "Python Fundamentals & Core Math",
+        "duration": "4 weeks",
+        "weekly_effort": "15-20 hours",
+        "description": "Solidify Python foundations and essential mathematical concepts for ML.",
+        "resources": [
+          "Python for Everybody - Coursera",
+          "Automate the Boring Stuff - Udemy",
+          "Khan Academy - Linear Algebra & Statistics"
+        ],
+        "focus_skills": [
+          "Python",
+          "Data Structures",
+          "Algorithms",
+          "Statistics",
+          "Linear Algebra",
+          "NumPy"
+        ],
+        "project_idea": "Create a simple command-line tool to perform statistical analysis on a dataset (e.g., calculate mean, median, standard deviation, correlation)."
+      },
+      {
+        "stage": 2,
+        "title": "Machine Learning Foundations",
+        "duration": "6 weeks",
+        "weekly_effort": "20-25 hours",
+        "description": "Dive into core ML algorithms and implement them using Scikit-learn.",
+        "resources": [
+          "Andrew Ng ML - Coursera",
+          "ML A-Z - Udemy",
+          "Scikit-learn documentation"
+        ],
+        "focus_skills": [
+          "Machine Learning",
+          "Data Preprocessing",
+          "Model Evaluation",
+          "Scikit-learn",
+          "Pandas"
+        ],
+        "project_idea": "Build a classification model to predict customer churn or a regression model to predict house prices using a publicly available dataset from Kaggle."
+      },
+      {
+        "stage": 3,
+        "title": "Deep Learning with PyTorch",
+        "duration": "8 weeks",
+        "weekly_effort": "25-30 hours",
+        "description": "Learn the fundamentals of deep learning and implement neural networks using PyTorch.",
+        "resources": [
+          "DeepLearning.AI Specialization - Coursera",
+          "PyTorch for Beginners - Udemy",
+          "Intro to Deep Learning with PyTorch - Udacity",
+          "PyTorch documentation"
+        ],
+        "focus_skills": [
+          "Deep Learning",
+          "TensorFlow (basics, optional)",
+          "PyTorch",
+          "Model Evaluation",
+          "Matplotlib"
+        ],
+        "project_idea": "Train a convolutional neural network (CNN) to classify images from the CIFAR-10 dataset or build a recurrent neural network (RNN) for text generation."
+      },
+      {
+        "stage": 4,
+        "title": "Specialization & Application",
+        "duration": "6 weeks",
+        "weekly_effort": "20-25 hours",
+        "description": "Focus on a specific AI domain (NLP, Computer Vision, Reinforcement Learning) and apply your skills to a more complex project.",
+        "resources": [
+          "Natural Language Processing - Coursera",
+          "Hugging Face Transformers Course",
+          "Domain-specific tutorials and research papers"
+        ],
+        "focus_skills": [
+          "NLP",
+          "Computer Vision",
+          "Reinforcement Learning",
+          "Domain-specific tools and techniques"
+        ],
+        "project_idea": "Build a sentiment analysis model using pre-trained transformers from Hugging Face, or implement a basic reinforcement learning agent to solve a simple game environment (e.g., OpenAI Gym's CartPole)."
+      }
+    ]
+  }
+}

@@ -1,8 +1,0 @@
-.prism-container {
-  /* Ensure background canvas fills the page and sits behind content */
-  position: fixed; /* changed from absolute to fixed to keep it stationary during scroll */
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}

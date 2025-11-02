@@ -1,0 +1,36 @@
+Project root (resolved): /Users/amar/Desktop/SynapseFinal/googlegenaiproject/app
+Outputs directory: /Users/amar/Desktop/SynapseFinal/googlegenaiproject/app/outputs
+Resume file expected at: /Users/amar/Desktop/SynapseFinal/googlegenaiproject/app/outputs/resume_skills.json
+Quiz file expected at: /Users/amar/Desktop/SynapseFinal/googlegenaiproject/app/outputs/quiz_report.json
+Skillgap output will be: /Users/amar/Desktop/SynapseFinal/googlegenaiproject/app/outputs/skillgap.json
+
+Running SkillGap Agent...
+
+Files currently in outputs/: ['learning_roadmap.json', 'market_insights.json', 'mentor_report.json', 'quiz.json', 'resume_skills.json', 'roadmap.json', 'skillgap.json']
+
+skillgap.json created at: /Users/amar/Desktop/SynapseFinal/googlegenaiproject/app/outputs/skillgap.json
+
+Preview of result:
+{
+  "timestamp": "2025-11-02T00:13:44.520603",
+  "resume_skills": [
+    "java",
+    "javascript",
+    "machine learning",
+    "numpy",
+    "pandas",
+    "python",
+    "sql"
+  ],
+  "quiz_indicated_gaps": [],
+  "inferred_skill_gaps": [
+    "data preprocessing",
+    "deploying models",
+    "real-world project exposure"
+  ],
+  "recommended_courses": [
+    "Caltech ML Fundamentals",
+    "Fast.ai Practical Deep Learning",
+    "DataCamp Data Preprocessing Track"
+  ]
+}

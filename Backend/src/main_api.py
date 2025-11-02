@@ -12,7 +12,7 @@ sys.path.append(BACKEND_DIR) # Add Backend/ to Python path
 
 # Absolute paths
 ENV_PATH = os.path.join(BACKEND_DIR, '.env')
-DATA_DIR = os.path.join(BACKEND_DIR, 'data', 'processed')
+DATA_DIR = os.path.join(SCRIPT_DIR, 'data', 'processed')
 
 # --- Local Module Imports ---
 from src.scoring_engine import SynapseScoringEngine

@@ -1,0 +1,115 @@
+
+from fastapi import FastAPI, UploadFile, File, BackgroundTasks, HTTPException, Path
+from fastapi.middleware.cors import CORSMiddleware
+import subprocess, os, uuid, shutil, json
+from pathlib import Path as Pathlib
+
+from typing import Dict
+
+BASE_DIR = Pathlib(__file__).resolve().parent
+OUTPUTS_DIR = BASE_DIR / "outputs"
+UPLOADS_DIR = BASE_DIR / "uploads"
+if not OUTPUTS_DIR.exists():
+    OUTPUTS_DIR.mkdir(parents=True, exist_ok=True)
+if not UPLOADS_DIR.exists():
+    UPLOADS_DIR.mkdir(parents=True, exist_ok=True)
+
+app = FastAPI(title="GenAI Project API")
+
+# Adjust origins before production
+origins = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://127.0.0.1:18081",
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+AGENT_MODULES: Dict[str, str] = {
+    "resume": "app.agents.resume",
+    "quiz": "app.agents.quiz",
+    "skillgap": "app.agents.skill_gap_agent",
+    "mentor": "app.agents.mentor",
+    "roadmap": "app.agents.roadmap",
+}
+
+def run_agent_module(module_path: str) -> None:
+    try:
+        subprocess.check_call(["python3", "-m", module_path], cwd=str(BASE_DIR.parent))
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"Agent {module_path} failed: {e}")
+
+@app.post("/api/upload_resume")
+async def upload_resume(file: UploadFile = File(...)):
+    filename = f"{uuid.uuid4().hex}_{file.filename}"
+    file_path = UPLOADS_DIR / filename
+    with open(file_path, "wb") as f:
+        shutil.copyfileobj(file.file, f)
+    return {"status": "saved", "path": str(file_path)}
+
+@app.post("/api/runall")
+async def run_all(background: BackgroundTasks):
+    run_script = BASE_DIR / "run_all.py"
+    if not run_script.exists():
+        raise HTTPException(status_code=500, detail="run_all.py not found in app/")
+    background.add_task(subprocess.run, ["python3", str(run_script)], {"cwd": str(BASE_DIR), "check": True})
+    return {"status": "started"}
+
+@app.post("/api/agent/{agent_name}")
+async def run_agent(agent_name: str = Path(..., description="one of: resume, quiz, skillgap, mentor, roadmap")):
+    agent_key = agent_name.lower()
+    if agent_key not in AGENT_MODULES:
+        raise HTTPException(status_code=400, detail=f"Unknown agent '{agent_name}'")
+    module = AGENT_MODULES[agent_key]
+    try:
+        run_agent_module(module)
+    except RuntimeError as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    candidate_names = {
+        "resume": ["resume_skills.json", "resume.json"],
+        "quiz": ["quiz.json"],
+        "skillgap": ["skillgap.json", "skill_gap.json"],
+        "mentor": ["mentor_report.json", "mentor.json"],
+        "roadmap": ["roadmap.json", "learning_roadmap.json"],
+    }
+    outputs = []
+    for name in candidate_names.get(agent_key, []):
+        p = OUTPUTS_DIR / name
+        if p.exists():
+            outputs.append(p)
+    if outputs:
+        p = outputs[0]
+        try:
+            return json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            return {"status": "done", "output_path": str(p)}
+    return {"status": "done", "message": f"{agent_name} executed, no named output found in outputs/"}
+
+@app.get("/api/outputs")
+async def list_outputs():
+    items = []
+    for p in OUTPUTS_DIR.glob("*"):
+        items.append({"name": p.name, "path": str(p)})
+    return {"outputs": items}
+
+@app.get("/api/outputs/{name}")
+async def get_output(name: str):
+    p = OUTPUTS_DIR / name
+    if not p.exists():
+        raise HTTPException(status_code=404, detail="Not found")
+    text = p.read_text(encoding="utf-8")
+    try:
+        return json.loads(text)
+    except Exception:
+        return {"name": p.name, "content": text}
+
+@app.get("/api/health")
+async def health():
+    return {"status": "ok"}
+

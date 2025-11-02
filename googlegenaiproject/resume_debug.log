@@ -1,0 +1,32 @@
+/Users/amar/Desktop/SynapseFinal/googlegenaiproject/app/agents/resume.py:78: PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.12/migration/
+  print(json.dumps(payload.dict(), indent=2))
+{
+  "profile_data": {
+    "extracted_skills": [
+      "git",
+      "github",
+      "javascript",
+      "leadership",
+      "machine learning",
+      "numpy",
+      "pandas",
+      "python",
+      "sql"
+    ],
+    "project_descriptions": [
+      "Bachelor of Technology in Computer Science and Engineering 2023-27",
+      "CKD Detection Using Ensemble Machine Learning Models",
+      "Python-Based Traffic Management and Visualization System",
+      "PassX \u2013 Personal Password Manager (Web-Based)",
+      "Summer Tech Internship June \u2013 July 2025"
+    ],
+    "experience_summary": [
+      "Summer Tech Internship June \u2013 July 2025 Times Internet Limited Offline \u2013 Worked with the Data Management Platform (DMP) team to optimize and automate the generation of advertiser- facing cohort dashboards and sales decks. \u2013 Built an end-to-end Google Slides automation pipeline using CrewAI and Gemini Flash, transforming structured cohort data into fully branded, insight-rich presentations. \u2013 Reduced sales deck generation time from 1\u20132 days to 15\u201320 minutes\u2014achieving over 95% time savings and im- proving operational efficiency by 20x. \u2013 Collaborated cross-functionally with product and engineering teams; presented final solution and outcomes to senior leadership, demonstrating both technical and communication skills. Technical Skills and Interests Languages: C/C++, Python, MATLAB, HTML+CSS Libraries : Pandas, numpy, Simpy Web Dev Tools: VScode, n8n, Git, Github Frameworks: CrewAI, LangChain, Looker Studio Databases:Relational Database(mySql), PL/SQL Design Tools: Figma, Canva Relevent Coursework: Data Structures & Algorithms, Operating Systems, Object Oriented Programming, Database Management System, Design and Analysis of Algorithm. Areas of Interest: Artificial Intelligence, Data Science,Data Processing and Analysis, Machine Learning, Generative AI Soft Skills: Collaboration, Communication, Problem Solving, Self-learning, Presentation, Adaptability Positions of Responsibility",
+      "Member \u2013 Organising Committee, Procurement & Events Committee Feb \u2013 Apr 2023 Le Fiestus \u2013 Annual Cultural Fest JUIT, Himachal Pradesh \u2013 Actively contributed to planning and execution of multiple successful events, including Le Fiestus, the college\u2019s flagship cultural fest. \u2013 Managed procurement of materials and coordinated logistics to ensure smooth and timely event operations. \u2013 Collaborated with vendors and peers to handle on-ground execution, resulting in high student engagement and successful delivery."
+    ],
+    "certifications": []
+  }
+}
+✅ Saved resume skills to outputs/resume_skills.json
+Extracted 9 skills:
+javascript, python, sql, numpy, leadership, pandas, machine learning, git, github

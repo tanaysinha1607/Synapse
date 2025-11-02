@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-11-02T00:13:44.520603",
+  "resume_skills": [
+    "java",
+    "javascript",
+    "machine learning",
+    "numpy",
+    "pandas",
+    "python",
+    "sql"
+  ],
+  "quiz_indicated_gaps": [],
+  "inferred_skill_gaps": [
+    "data preprocessing",
+    "deploying models",
+    "real-world project exposure"
+  ],
+  "recommended_courses": [
+    "Caltech ML Fundamentals",
+    "Fast.ai Practical Deep Learning",
+    "DataCamp Data Preprocessing Track"
+  ]
+}

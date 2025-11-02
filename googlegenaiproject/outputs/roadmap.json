@@ -1,0 +1,85 @@
+{
+  "roadmap": [
+    {
+      "week": 1,
+      "start_date": "2024-05-27",
+      "focus": "Data Preprocessing Fundamentals & Initial Setup",
+      "resources": [
+        "DataCamp Data Preprocessing Track (Introduction & Data Cleaning)",
+        "Review NumPy and Pandas basics related to data manipulation"
+      ],
+      "outcome": "Understand core data preprocessing techniques (handling missing values, data type conversion) and refresh foundational knowledge of NumPy and Pandas for data manipulation."
+    },
+    {
+      "week": 2,
+      "start_date": "2024-06-03",
+      "focus": "Advanced Data Preprocessing Techniques",
+      "resources": [
+        "DataCamp Data Preprocessing Track (Feature Scaling & Encoding Categorical Data)",
+        "Explore libraries like Scikit-learn for preprocessing tasks"
+      ],
+      "outcome": "Implement feature scaling (normalization, standardization) and handle categorical data (one-hot encoding, label encoding) using Scikit-learn."
+    },
+    {
+      "week": 3,
+      "start_date": "2024-06-10",
+      "focus": "Mini Project: Data Preprocessing Pipeline for a Regression Task",
+      "resources": [
+        "Kaggle: Find a regression dataset (e.g., house price prediction)",
+        "Implement a complete data preprocessing pipeline using Pandas and Scikit-learn"
+      ],
+      "outcome": "Build a functional data preprocessing pipeline for a regression problem, including data cleaning, feature engineering, and scaling."
+    },
+    {
+      "week": 4,
+      "start_date": "2024-06-17",
+      "focus": "Introduction to Model Deployment",
+      "resources": [
+        "Research different model deployment options (Flask, FastAPI, AWS SageMaker, Google Cloud AI Platform)",
+        "Choose a framework (start with Flask for simplicity)"
+      ],
+      "outcome": "Understand the landscape of model deployment and choose a suitable framework for simple deployments (Flask)."
+    },
+    {
+      "week": 5,
+      "start_date": "2024-06-24",
+      "focus": "Deploying a Simple Model with Flask",
+      "resources": [
+        "Flask documentation and tutorials",
+        "Tutorials on deploying machine learning models with Flask"
+      ],
+      "outcome": "Deploy a simple machine learning model (e.g., a linear regression model) using Flask to a local server."
+    },
+    {
+      "week": 6,
+      "start_date": "2024-07-01",
+      "focus": "Containerization with Docker (Deployment)",
+      "resources": [
+        "Docker documentation and tutorials",
+        "Learn to containerize your Flask application and model."
+      ],
+      "outcome": "Containerize your Flask application and deployed model using Docker for consistent deployment environments."
+    },
+    {
+      "week": 7,
+      "start_date": "2024-07-08",
+      "focus": "Real-World Project Exploration & Selection",
+      "resources": [
+        "Kaggle competitions",
+        "AIcrowd challenges",
+        "Explore open-source ML projects on GitHub"
+      ],
+      "outcome": "Identify a real-world machine learning project that aligns with your interests and skillset. Scope out potential tasks to improve upon or build an extension."
+    },
+    {
+      "week": 8,
+      "start_date": "2024-07-15",
+      "focus": "Real-World Project Implementation (Data Acquisition & Initial Preprocessing)",
+      "resources": [
+        "Selected real-world project dataset or API",
+        "Implement data acquisition and initial preprocessing steps for the project"
+      ],
+      "outcome": "Acquire the necessary data for your chosen real-world project and perform initial data preprocessing (cleaning, handling missing values)."
+    }
+  ]
+}

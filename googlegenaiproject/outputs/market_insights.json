@@ -1,0 +1,117 @@
+{
+  "trending_skills": [
+    "Generative AI",
+    "Explainable AI (XAI)",
+    "Federated Learning",
+    "MLOps",
+    "Transformer Networks",
+    "Graph Neural Networks",
+    "Reinforcement Learning",
+    "Deep Learning"
+  ],
+  "top_roles": [
+    {
+      "role": "AI/ML Engineer",
+      "demand_reason": "High demand for building and deploying ML models in production.",
+      "skill_priority": [
+        "Python",
+        "TensorFlow",
+        "PyTorch",
+        "MLOps",
+        "Data Structures",
+        "Algorithms"
+      ]
+    },
+    {
+      "role": "Data Scientist",
+      "demand_reason": "Businesses need data-driven insights for decision-making.",
+      "skill_priority": [
+        "Python",
+        "Statistics",
+        "Machine Learning",
+        "Data Preprocessing",
+        "Model Evaluation",
+        "Data Visualization"
+      ]
+    },
+    {
+      "role": "Computer Vision Engineer",
+      "demand_reason": "Growing applications in autonomous systems and image analysis.",
+      "skill_priority": [
+        "Python",
+        "Computer Vision",
+        "Deep Learning",
+        "TensorFlow",
+        "PyTorch"
+      ]
+    },
+    {
+      "role": "NLP Engineer",
+      "demand_reason": "Increased adoption of chatbots and language understanding applications.",
+      "skill_priority": [
+        "Python",
+        "NLP",
+        "Deep Learning",
+        "Transformer Networks",
+        "PyTorch"
+      ]
+    }
+  ],
+  "top_tools": [
+    "TensorFlow",
+    "PyTorch",
+    "Scikit-learn",
+    "Kubeflow",
+    "MLflow",
+    "AWS SageMaker",
+    "GCP Vertex AI",
+    "Azure Machine Learning"
+  ],
+  "salary_insights": [
+    {
+      "location": "San Francisco, CA",
+      "median_inr": 18000000,
+      "notes": "Salaries vary based on experience and company size."
+    },
+    {
+      "location": "New York, NY",
+      "median_inr": 16000000,
+      "notes": "High demand in financial and tech sectors."
+    },
+    {
+      "location": "Bangalore, India",
+      "median_inr": 3500000,
+      "notes": "Growing AI/ML hub, salaries are competitive."
+    },
+    {
+      "location": "Mumbai, India",
+      "median_inr": 3200000,
+      "notes": "Increasing opportunities in finance and e-commerce."
+    }
+  ],
+  "hiring_signals": [
+    {
+      "source": "LinkedIn",
+      "signal": "Increased job postings for Generative AI roles.",
+      "confidence": 0.9
+    },
+    {
+      "source": "Glassdoor",
+      "signal": "Rising salaries for MLOps engineers.",
+      "confidence": 0.8
+    },
+    {
+      "source": "Industry Conferences",
+      "signal": "Focus on ethical AI and responsible AI development.",
+      "confidence": 0.7
+    }
+  ],
+  "action_recommendations": [
+    "Focus on MLOps to enhance deployment skills.",
+    "Explore Generative AI techniques.",
+    "Contribute to open-source ML projects.",
+    "Build a portfolio showcasing practical ML applications.",
+    "Network with industry professionals at AI/ML events.",
+    "Certifications in Cloud ML platforms (AWS, Azure, GCP)."
+  ]
+}

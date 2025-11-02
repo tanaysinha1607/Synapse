@@ -1,0 +1,64 @@
+{
+  "score_percent": 74.0,
+  "per_question": {
+    "1": {
+      "choice": "c",
+      "interpretation": "Prefers high-growth startup with impact.",
+      "score_1_5": 5
+    },
+    "2": {
+      "choice": "a",
+      "interpretation": "Motivated by learning and skill growth.",
+      "score_1_5": 5
+    },
+    "3": {
+      "choice": "a",
+      "interpretation": "Aspirations towards deep technical mastery.",
+      "score_1_5": 5
+    },
+    "4": {
+      "choice": "b",
+      "interpretation": "Commits 4-6 hours/week to upskilling.",
+      "score_1_5": 4
+    },
+    "5": {
+      "choice": "a",
+      "interpretation": "Prefers hands-on projects for learning.",
+      "score_1_5": 5
+    },
+    "6": {
+      "choice": "b",
+      "interpretation": "Self-rated as intermediate in primary technical skill.",
+      "score_1_5": 3
+    },
+    "7": {
+      "choice": "b",
+      "interpretation": "Prefers a fast-paced startup environment.",
+      "score_1_5": 5
+    },
+    "8": {
+      "choice": "a",
+      "interpretation": "Open to unconventional job titles.",
+      "score_1_5": 5
+    },
+    "9": {
+      "choice": "a",
+      "interpretation": "Energized by building and shipping products.",
+      "score_1_5": 4
+    },
+    "10": {
+      "choice": "400000",
+      "interpretation": "Minimum acceptable salary is 400,000 INR. This is not scored; assume reasonable for early career.",
+      "score_1_5": 3
+    }
+  },
+  "persona": "Aspiring Tech Innovator",
+  "summary": "This individual is highly motivated by learning and impact within a fast-paced startup environment, showing a strong desire for deep technical mastery and openness to unconventional roles. With a commitment to upskilling and a preference for hands-on learning, they are positioned to thrive in a role where they can build and ship products.",
+  "recommendations": [
+    "Focus upskilling efforts on skills demanded by high-growth startups in your target area.",
+    "Seek out projects that allow you to apply and expand your skills.",
+    "Network with individuals in startups to gain insights and opportunities.",
+    "Showcase your project work in a portfolio or online platform (e.g., GitHub).",
+    "Target startups building tangible products, as this aligns with the preferred work type."
+  ]
+}
