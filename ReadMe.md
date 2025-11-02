@@ -158,8 +158,8 @@ cd googlegenaiproject
 pip install -r requirements.txt
 
 # Set environment variables
-export GEMINI_API_KEY=<your_api_key>
-export GCP_PROJECT_ID=<your_project_id>
+export GEMINI_API_KEY=AIzaSyD_HRneo82kfC8TSc_TzaojOwh0q3Wf5v0
+export GCP_PROJECT_ID=synapse-hackathon-470816
 export GCP_REGION=us-central1
 
 # Run backend
